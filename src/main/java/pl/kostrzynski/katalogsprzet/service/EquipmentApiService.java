@@ -1,47 +1,46 @@
 package pl.kostrzynski.katalogsprzet.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.context.event.ApplicationReadyEvent;
-import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Service;
-import pl.kostrzynski.katalogsprzet.model.Classification;
 import pl.kostrzynski.katalogsprzet.model.Equipment;
-import pl.kostrzynski.katalogsprzet.repo.Repo;
+import pl.kostrzynski.katalogsprzet.repo.EquipmentRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
-public class EquipmentApiImpl {
+public class EquipmentApiService {
 
-private Repo repo;
+private EquipmentRepository equipmentRepository;
 
     @Autowired
-    public EquipmentApiImpl(Repo repo) {
-        this.repo = repo;
+    public EquipmentApiService(EquipmentRepository equipmentRepository) {
+        this.equipmentRepository = equipmentRepository;
     }
 
     private List<Equipment>getAvailableEquipment(){
-       return repo.findAllByAvailability(true);
+       return equipmentRepository.findAllByAvailability(true);
     }
 
     public List<Equipment> getAllEquipment(){
-        return repo.findAll();
+        return equipmentRepository.findAll();
     }
     public List<Equipment> getAllAvailableEquipment(){
         return getAvailableEquipment();
     }
 
     public boolean addEquipment(Equipment equipment){
-            repo.save(equipment);
+            equipmentRepository.save(equipment);
             return true;
     }
 
     public boolean changeAvailability(Long id,boolean availability){
-        if(repo.findById(id).isPresent())
+        Optional<Equipment> optionalEquipment = equipmentRepository.findById(id);
+        if(optionalEquipment.isPresent())
         {
-            Equipment equipment=repo.findById(id).get();
+            Equipment equipment=optionalEquipment.get();
             equipment.setAvailability(availability);
-            repo.save(equipment);
+            equipmentRepository.save(equipment);
             return true;
         }
         return false;

@@ -5,7 +5,7 @@ import pl.kostrzynski.katalogsprzet.model.Equipment;
 
 import java.util.List;
 
-public interface Repo extends JpaRepository<Equipment, Long> {
+public interface EquipmentRepository extends JpaRepository<Equipment, Long> {
     List<Equipment> findAllByAvailability(Boolean availability);
 
 }
