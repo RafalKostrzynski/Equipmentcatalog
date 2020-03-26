@@ -5,7 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.kostrzynski.katalogsprzet.model.Equipment;
-import pl.kostrzynski.katalogsprzet.service.EquipmentApiService;
+import pl.kostrzynski.katalogsprzet.service.EquipmentService;
 
 import java.util.List;
 
@@ -13,25 +13,25 @@ import java.util.List;
 @RequestMapping("/equipment")
 public class EquipmentApi {
 
-    private EquipmentApiService equipmentApiService;
+    private EquipmentService equipmentService;
 
     @Autowired
-    public EquipmentApi(EquipmentApiService equipmentApi) {
-        this.equipmentApiService = equipmentApi;
+    public EquipmentApi(EquipmentService equipmentApi) {
+        this.equipmentService = equipmentApi;
     }
 
     @GetMapping("/getAll")
     public ResponseEntity<List<Equipment>> getAllEquipment(){
-        return new ResponseEntity<>(equipmentApiService.getAllEquipment(), HttpStatus.OK);
+        return new ResponseEntity<>(equipmentService.getAllEquipment(), HttpStatus.OK);
     }
     @GetMapping("/getAllAvailable")
     public ResponseEntity<List<Equipment>> getAllAvailableEquipment(){
-        return new ResponseEntity<>(equipmentApiService.getAllAvailableEquipment(), HttpStatus.OK);
+        return new ResponseEntity<>(equipmentService.getAllAvailableEquipment(), HttpStatus.OK);
     }
 
     @PostMapping
     public ResponseEntity<HttpStatus> postEquipment(@RequestBody Equipment newEquipment){
-        if(equipmentApiService.addEquipment(newEquipment)){
+        if(equipmentService.addEquipment(newEquipment)){
             return new ResponseEntity<>(HttpStatus.ACCEPTED);
         }
         return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
@@ -39,7 +39,7 @@ public class EquipmentApi {
 
     @GetMapping("/changeAvailability")
     public ResponseEntity<HttpStatus> changeAvailability(@RequestParam Long id, @RequestParam boolean available){
-        if(equipmentApiService.changeAvailability(id, available)){
+        if(equipmentService.changeAvailability(id, available)){
             return new ResponseEntity<>(HttpStatus.ACCEPTED);
         }
         return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
