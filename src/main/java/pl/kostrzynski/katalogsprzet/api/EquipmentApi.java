@@ -28,6 +28,19 @@ public class EquipmentApi {
     public ResponseEntity<List<Equipment>> getAllAvailableEquipment(){
         return new ResponseEntity<>(equipmentService.getAllAvailableEquipment(), HttpStatus.OK);
     }
+    @GetMapping("/getEquipmentById")
+    public ResponseEntity<Equipment> getEquipmentById(@RequestParam long id){
+        return new ResponseEntity<>(equipmentService.getEquipmentById(id), HttpStatus.OK);
+    }
+
+    @GetMapping("/getAllAvailableEquipmentByName")
+    public ResponseEntity<List<Equipment>> getAllAvailableEquipmentByName(@RequestParam String equipmentName){
+        return new ResponseEntity<>(equipmentService.getEquipmentByName(equipmentName), HttpStatus.OK);
+    }
+    @GetMapping("/getAllAvailableEquipmentBySpecification")
+    public ResponseEntity<List<Equipment>> getAllAvailableEquipmentBySpecification(@RequestParam String specification){
+        return new ResponseEntity<>(equipmentService.getAllAvailableEquipmentBySpecification(specification), HttpStatus.OK);
+    }
 
     @PostMapping
     public ResponseEntity<HttpStatus> postEquipment(@RequestBody Equipment newEquipment){

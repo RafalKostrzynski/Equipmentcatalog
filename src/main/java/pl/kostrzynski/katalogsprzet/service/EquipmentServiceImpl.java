@@ -33,11 +33,12 @@ public class EquipmentServiceImpl implements EquipmentService {
         return equipmentRepository.findAllByAvailability(true);
     }
 
+    //TODO Dodac warunek
     @Override
     public List<Equipment> getAllAvailableEquipmentByClassification(Classification classification) {
         return equipmentRepository.findAllByClassification(classification);
     }
-
+    //TODO Dodac warunek
     @Override
     public List<Equipment> getAllAvailableEquipmentBySpecification(String specification) {
         return equipmentRepository.findAllBySpecification(specification);
@@ -50,7 +51,7 @@ public class EquipmentServiceImpl implements EquipmentService {
 
     @Override
     public List<Equipment> getEquipmentByName(String name) {
-        return equipmentRepository.findAllByName(name);
+        return equipmentRepository.findAllByEquipmentName(name);
     }
 
     @Override
