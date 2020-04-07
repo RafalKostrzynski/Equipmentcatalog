@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import pl.kostrzynski.katalogsprzet.model.Classification;
 import pl.kostrzynski.katalogsprzet.model.Equipment;
 import pl.kostrzynski.katalogsprzet.service.EquipmentService;
 
@@ -12,6 +13,9 @@ import java.util.List;
 @RestController
 @RequestMapping("/equipment")
 public class EquipmentApi {
+
+    //TODO rozdzielenie klasy API na zwracającą dostepne i wszystkie
+    //TODO napisać endpoint który zwraca informacje o wszystkich Mappingach
 
     private EquipmentService equipmentService;
 
@@ -22,24 +26,37 @@ public class EquipmentApi {
 
     @GetMapping("/getAll")
     public ResponseEntity<List<Equipment>> getAllEquipment(){
-        return new ResponseEntity<>(equipmentService.getAllEquipment(), HttpStatus.OK);
+        List<Equipment>equipment=equipmentService.getAllEquipment();
+        if(!equipment.isEmpty()) return new ResponseEntity<>(equipment, HttpStatus.OK);
+        return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
     }
+
     @GetMapping("/getAllAvailable")
     public ResponseEntity<List<Equipment>> getAllAvailableEquipment(){
-        return new ResponseEntity<>(equipmentService.getAllAvailableEquipment(), HttpStatus.OK);
+        List<Equipment>equipment=equipmentService.getAllAvailableEquipment();
+        if(!equipment.isEmpty()) return new ResponseEntity<>(equipment, HttpStatus.OK);
+        return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
     }
+
     @GetMapping("/getEquipmentById")
     public ResponseEntity<Equipment> getEquipmentById(@RequestParam long id){
-        return new ResponseEntity<>(equipmentService.getEquipmentById(id), HttpStatus.OK);
+        Equipment equipment=(equipmentService.getEquipmentById(id));
+        if (equipment!=null) return new ResponseEntity<>(equipment, HttpStatus.OK);
+        return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
     }
 
     @GetMapping("/getAllAvailableEquipmentByName")
     public ResponseEntity<List<Equipment>> getAllAvailableEquipmentByName(@RequestParam String equipmentName){
-        return new ResponseEntity<>(equipmentService.getEquipmentByName(equipmentName), HttpStatus.OK);
+        List<Equipment>equipment=equipmentService.getAvailableEquipmentByName(equipmentName);
+        if(!equipment.isEmpty()) return new ResponseEntity<>(equipment, HttpStatus.OK);
+        return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
     }
+
     @GetMapping("/getAllAvailableEquipmentBySpecification")
     public ResponseEntity<List<Equipment>> getAllAvailableEquipmentBySpecification(@RequestParam String specification){
-        return new ResponseEntity<>(equipmentService.getAllAvailableEquipmentBySpecification(specification), HttpStatus.OK);
+        List<Equipment>equipment=equipmentService.getAllAvailableEquipmentBySpecification(specification);
+        if(!equipment.isEmpty()) return new ResponseEntity<>(equipment, HttpStatus.OK);
+        return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
     }
 
     @PostMapping
@@ -58,5 +75,29 @@ public class EquipmentApi {
         return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
     }
 
+    @GetMapping("/getAllAvailableEquipmentByClassification")
+    public ResponseEntity<List<Equipment>> getAllAvailableEquipmentByClassification(@RequestParam String stClassification){
+        Classification classification;
+        switch (stClassification.toLowerCase()){
+            case "pilki":
+                classification=Classification.PILKI;
+                break;
+            case "treningsilowy":
+                classification=Classification.TRENINGSILOWY;
+                break;
+            case "lawkidocwiczen":
+                classification=Classification.LAWKIDOCWICZEN;
+                break;
+            case "kardio":
+                classification=Classification.KARDIO;
+                break;
+            case "maty":
+                classification=Classification.MATY;
+                break;
+            default:
+                return new ResponseEntity<>(null,HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(equipmentService.getAllAvailableEquipmentByClassification(classification),HttpStatus.OK);
+    }
 
 }

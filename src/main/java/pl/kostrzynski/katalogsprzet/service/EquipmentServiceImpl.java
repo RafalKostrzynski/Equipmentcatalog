@@ -19,10 +19,6 @@ public class EquipmentServiceImpl implements EquipmentService {
         this.equipmentRepository = equipmentRepository;
     }
 
-    // private List<Equipment>getAvailableEquipment(){
-    //   return equipmentRepository.findAllByAvailability(true);
-    //   }
-
     @Override
     public List<Equipment> getAllEquipment() {
         return equipmentRepository.findAll();
@@ -33,15 +29,14 @@ public class EquipmentServiceImpl implements EquipmentService {
         return equipmentRepository.findAllByAvailability(true);
     }
 
-    //TODO Dodac warunek
     @Override
     public List<Equipment> getAllAvailableEquipmentByClassification(Classification classification) {
-        return equipmentRepository.findAllByClassification(classification);
+        return equipmentRepository.findAllByClassificationAndAvailability(classification, true);
     }
-    //TODO Dodac warunek
+
     @Override
     public List<Equipment> getAllAvailableEquipmentBySpecification(String specification) {
-        return equipmentRepository.findAllBySpecification(specification);
+        return equipmentRepository.findAllBySpecificationAndAvailability(specification, true);
     }
 
     @Override
@@ -50,8 +45,8 @@ public class EquipmentServiceImpl implements EquipmentService {
     }
 
     @Override
-    public List<Equipment> getEquipmentByName(String name) {
-        return equipmentRepository.findAllByEquipmentName(name);
+    public List<Equipment> getAvailableEquipmentByName(String name) {
+        return equipmentRepository.findAllByEquipmentNameAndAvailability(name,true);
     }
 
     @Override

@@ -11,7 +11,7 @@ public interface EquipmentService {
     List<Equipment> getAllAvailableEquipment();
     List<Equipment> getAllAvailableEquipmentByClassification(Classification classification);
     List<Equipment> getAllAvailableEquipmentBySpecification(String specification);
-    List<Equipment> getEquipmentByName(String Name);
+    List<Equipment> getAvailableEquipmentByName(String Name);
     Equipment getEquipmentById(long id);
     boolean addEquipment(Equipment equipment);
     boolean changeAvailability(Long id,boolean availability);

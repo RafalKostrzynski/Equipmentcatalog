@@ -10,7 +10,7 @@ import java.util.List;
 @Repository
 public interface EquipmentRepository extends JpaRepository<Equipment, Long> {
     List<Equipment> findAllByAvailability(Boolean availability);
-    List<Equipment> findAllByClassification(Classification classification);
-    List<Equipment> findAllBySpecification(String specification);
-    List<Equipment> findAllByEquipmentName(String name);
+    List<Equipment> findAllByClassificationAndAvailability(Classification classification,Boolean availability);
+    List<Equipment> findAllBySpecificationAndAvailability(String specification, Boolean availability);
+    List<Equipment> findAllByEquipmentNameAndAvailability(String name, Boolean availability);
 }
