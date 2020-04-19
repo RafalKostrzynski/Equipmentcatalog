@@ -11,7 +11,7 @@ import pl.kostrzynski.katalogsprzet.service.EquipmentService;
 import java.util.List;
 
 @RestController
-@RequestMapping("/equipment")
+@RequestMapping("justfit/equipment")
 public class EquipmentApi {
 
     //TODO rozdzielenie klasy API na zwracającą dostepne i wszystkie
