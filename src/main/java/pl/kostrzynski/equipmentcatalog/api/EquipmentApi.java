@@ -11,7 +11,7 @@ import pl.kostrzynski.equipmentcatalog.service.EquipmentService;
 import java.util.List;
 
 @RestController
-@RequestMapping("justfit/equipment")
+@RequestMapping("equipment")
 public class EquipmentApi {
 
     //TODO rozdzielenie klasy API na zwracającą dostepne i wszystkie
@@ -22,12 +22,6 @@ public class EquipmentApi {
     @Autowired
     public EquipmentApi(EquipmentService equipmentApi) {
         this.equipmentService = equipmentApi;
-    }
-
-    @GetMapping
-    public String info(){
-
-        return "ABC NIE DZIALA ";
     }
 
     @GetMapping("/getAll")
