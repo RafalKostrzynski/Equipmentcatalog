@@ -24,6 +24,12 @@ public class EquipmentApi {
         this.equipmentService = equipmentApi;
     }
 
+    @GetMapping
+    public String info(){
+
+        return "ABC NIE DZIALA ";
+    }
+
     @GetMapping("/getAll")
     public ResponseEntity<List<Equipment>> getAllEquipment(){
         List<Equipment>equipment=equipmentService.getAllEquipment();
