@@ -24,11 +24,6 @@ public class EquipmentApiAll {
         this.equipmentService = equipmentService;
     }
 
-    @GetMapping
-    @ApiOperation("Returns information about the API")
-    public ModelAndView getInfo() {
-        return new ModelAndView("redirect:/swagger-ui.html");
-    }
 
     @GetMapping("/getAll")
     @ApiOperation("Gets a list with all Equipments in the database")

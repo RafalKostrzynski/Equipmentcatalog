@@ -36,7 +36,7 @@ public class SwaggerConfig {
         return new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(apiInfo())
                 .pathMapping("")
-                .ignoredParameterTypes(ModelAndView.class)
+                .ignoredParameterTypes()
                 .select()
                 .paths(PathSelectors.regex("/justfit.equipment.*"))
                 .build();

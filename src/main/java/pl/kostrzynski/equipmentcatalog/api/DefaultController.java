@@ -24,4 +24,5 @@ public class DefaultController implements ErrorController {
     public void redirect(HttpServletResponse response) throws IOException {
         response.sendRedirect("/swagger-ui.html");
     }
+
 }
