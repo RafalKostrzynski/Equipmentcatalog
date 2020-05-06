@@ -46,7 +46,7 @@ public class EquipmentServiceImpl implements EquipmentService {
 
     @Override
     public List<Equipment> getAvailableEquipmentByName(String name) {
-        return equipmentRepository.findAllByEquipmentNameAndAvailability(name,true);
+        return equipmentRepository.findAllByEquipmentNameAndAvailability(name, true);
     }
 
     @Override
@@ -56,11 +56,38 @@ public class EquipmentServiceImpl implements EquipmentService {
     }
 
     @Override
+    public boolean updateEquipment(Equipment equipment) {
+        if(equipmentRepository.findById(equipment.getID()).isPresent()){
+            return addEquipment(equipment);
+        }
+        return false;
+    }
+
+    @Override
     public boolean changeAvailability(Long id, boolean availability) {
         Optional<Equipment> optionalEquipment = equipmentRepository.findById(id);
         if (optionalEquipment.isPresent()) {
             Equipment equipment = optionalEquipment.get();
             equipment.setAvailability(availability);
+            equipmentRepository.save(equipment);
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean changeBrokenStatus(Long id, boolean broken) {
+        Optional<Equipment> optionalEquipment = equipmentRepository.findById(id);
+        if (optionalEquipment.isPresent()) {
+            Equipment equipment = optionalEquipment.get();
+            if(broken){
+                equipment.setBroken(true);
+                equipment.setAvailability(false);
+            }
+            else{
+                equipment.setBroken(false);
+                equipment.setAvailability(true);
+            }
             equipmentRepository.save(equipment);
             return true;
         }

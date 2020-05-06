@@ -1,9 +1,9 @@
 package pl.kostrzynski.equipmentcatalog.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import org.hibernate.annotations.Columns;
+
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class Equipment {
@@ -11,21 +11,24 @@ public class Equipment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long ID;
+    @NotNull
     private String equipmentName;
     private Classification classification;
     private String specification;
+    @NotNull
     private boolean broken;
+    @NotNull
     private boolean availability;
 
     public Equipment() {
     }
 
-    public Equipment(String equipmentName,Classification classification,String specification,boolean broken,boolean availability) {
-        this.equipmentName=equipmentName;
-        this.classification=classification;
-        this.specification=specification;
-        this.broken=broken;
-        this.availability=availability;
+    public Equipment(String equipmentName, Classification classification, String specification, boolean broken, boolean availability) {
+        this.equipmentName = equipmentName;
+        this.classification = classification;
+        this.specification = specification;
+        this.broken = broken;
+        this.availability = availability;
     }
 
     public Long getID() {
