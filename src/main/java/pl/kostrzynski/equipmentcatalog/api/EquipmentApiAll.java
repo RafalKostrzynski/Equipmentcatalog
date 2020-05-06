@@ -24,7 +24,6 @@ public class EquipmentApiAll {
         this.equipmentService = equipmentService;
     }
 
-
     @GetMapping("/getAll")
     @ApiOperation("Gets a list with all Equipments in the database")
     @ApiResponses(value = {@ApiResponse(code = 200, message = "OK", response = Equipment.class), @ApiResponse(code = 404, message = "NOT_FOUND")})
