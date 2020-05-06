@@ -26,7 +26,7 @@ public class EquipmentApiAll {
 
     @GetMapping
     @ApiOperation("Returns information about the API")
-    public ModelAndView getInfo(){
+    public ModelAndView getInfo() {
         return new ModelAndView("redirect:/swagger-ui.html");
     }
 

@@ -30,8 +30,9 @@ public class SwaggerConfig {
                 .version(SWAGGER_API_VERSION)
                 .build();
     }
+
     @Bean
-    public Docket equipmentApi(){
+    public Docket equipmentApi() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(apiInfo())
                 .pathMapping("")

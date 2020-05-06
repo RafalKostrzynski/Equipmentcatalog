@@ -57,7 +57,7 @@ public class EquipmentServiceImpl implements EquipmentService {
 
     @Override
     public boolean updateEquipment(Equipment equipment) {
-        if(equipmentRepository.findById(equipment.getID()).isPresent()){
+        if (equipmentRepository.findById(equipment.getID()).isPresent()) {
             return addEquipment(equipment);
         }
         return false;
@@ -80,11 +80,10 @@ public class EquipmentServiceImpl implements EquipmentService {
         Optional<Equipment> optionalEquipment = equipmentRepository.findById(id);
         if (optionalEquipment.isPresent()) {
             Equipment equipment = optionalEquipment.get();
-            if(broken){
+            if (broken) {
                 equipment.setBroken(true);
                 equipment.setAvailability(false);
-            }
-            else{
+            } else {
                 equipment.setBroken(false);
                 equipment.setAvailability(true);
             }
