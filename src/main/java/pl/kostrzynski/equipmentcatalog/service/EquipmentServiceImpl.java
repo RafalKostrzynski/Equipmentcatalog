@@ -51,7 +51,11 @@ public class EquipmentServiceImpl implements EquipmentService {
 
     @Override
     public boolean addEquipment(Equipment equipment) {
-        equipmentRepository.save(equipment);
+        try {
+            equipmentRepository.save(equipment);
+        }catch (Exception e){
+            return false;
+        }
         return true;
     }
 
