@@ -8,10 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import pl.kostrzynski.equipmentcatalog.model.Classification;
 import pl.kostrzynski.equipmentcatalog.model.Equipment;
 import pl.kostrzynski.equipmentcatalog.service.EquipmentService;
@@ -34,7 +31,7 @@ public class EquipmentApiAvailable {
     @ApiOperation("Gets a list with all available Equipments from the database")
     @ApiResponses(value = {@ApiResponse(code = 200, message = "OK", response = Equipment.class), @ApiResponse(code = 404, message = "NOT_FOUND")})
     public ResponseEntity<List<Equipment>> getAllAvailableEquipment() {
-        List<Equipment> equipment = equipmentService.getAllAvailableEquipment();
+        List<Equipment> equipment = equipmentService.getAllAvailableEquipment(true);
         if (!equipment.isEmpty()) return new ResponseEntity<>(equipment, HttpStatus.OK);
         return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
     }

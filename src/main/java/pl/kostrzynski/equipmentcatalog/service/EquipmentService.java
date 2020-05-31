@@ -10,7 +10,7 @@ public interface EquipmentService {
 
     List<Equipment> getAllEquipment();
 
-    List<Equipment> getAllAvailableEquipment();
+    List<Equipment> getAllAvailableEquipment(boolean available);
 
     List<Equipment> getAllAvailableEquipmentByClassification(Classification classification);
 
@@ -25,6 +25,8 @@ public interface EquipmentService {
     boolean updateEquipment(Equipment equipment);
 
     boolean changeAvailability(Long id, boolean availability);
+
+    boolean changeAvailability(List<Equipment> equipmentList,boolean availability);
 
     boolean changeBrokenStatus(Long id, boolean broken);
 

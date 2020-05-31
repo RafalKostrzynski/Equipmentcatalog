@@ -1,4 +1,4 @@
-package pl.kostrzynski.equipmentcatalog.api;
+package pl.kostrzynski.equipmentcatalog.controller;
 
 import org.springframework.boot.web.servlet.error.ErrorController;
 import org.springframework.stereotype.Controller;

@@ -52,7 +52,7 @@ public class EquipmentApiAll {
         return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
     }
 
-    @PostMapping("/update")
+    @PutMapping("/update")
     @ApiOperation("Update an existing equipment")
     @ApiResponses(value = {@ApiResponse(code = 202, message = "ACCEPTED", response = Equipment.class), @ApiResponse(code = 406, message = "NOT_ACCEPTABLE")})
     public ResponseEntity<Equipment> updateEquipment(@RequestBody Equipment equipment) {
@@ -62,11 +62,30 @@ public class EquipmentApiAll {
         return new ResponseEntity<>(equipmentService.getEquipmentById(equipment.getID()), HttpStatus.NOT_ACCEPTABLE);
     }
 
+    @GetMapping("/getAllUnAvailable")
+    @ApiOperation("Gets a list with all unavailable Equipments from the database")
+    @ApiResponses(value = {@ApiResponse(code = 200, message = "OK", response = Equipment.class), @ApiResponse(code = 404, message = "NOT_FOUND")})
+    public ResponseEntity<List<Equipment>> getAllUnAvailableEquipment() {
+        List<Equipment> equipment = equipmentService.getAllAvailableEquipment(false);
+        if (!equipment.isEmpty()) return new ResponseEntity<>(equipment, HttpStatus.OK);
+        return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+    }
+
     @GetMapping("/changeAvailability")
     @ApiOperation("Change Availability of an Equipment")
     @ApiResponses(value = {@ApiResponse(code = 202, message = "ACCEPTED"), @ApiResponse(code = 406, message = "NOT_ACCEPTABLE")})
     public ResponseEntity<HttpStatus> changeAvailability(@RequestParam Long id, @RequestParam boolean available) {
         if (equipmentService.changeAvailability(id, available)) {
+            return new ResponseEntity<>(HttpStatus.ACCEPTED);
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
+    }
+
+    @PutMapping("/changeAvailabilityList")
+    @ApiOperation("Update availability off a equipmentList")
+    @ApiResponses(value = {@ApiResponse(code = 202, message = "ACCEPTED"), @ApiResponse(code = 406, message = "NOT_ACCEPTABLE")})
+    public ResponseEntity<HttpStatus> changeAvailabilityList(@RequestBody List<Equipment>equipmentList,@RequestParam boolean availability){
+        if (equipmentService.changeAvailability(equipmentList,availability)) {
             return new ResponseEntity<>(HttpStatus.ACCEPTED);
         }
         return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
