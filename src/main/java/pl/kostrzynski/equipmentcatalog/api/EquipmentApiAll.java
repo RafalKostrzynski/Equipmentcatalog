@@ -6,7 +6,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 import pl.kostrzynski.equipmentcatalog.model.Equipment;
 import pl.kostrzynski.equipmentcatalog.service.EquipmentService;
 
@@ -52,7 +51,7 @@ public class EquipmentApiAll {
         return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
     }
 
-    @PutMapping("/update")
+    @PatchMapping("/update")
     @ApiOperation("Update an existing equipment")
     @ApiResponses(value = {@ApiResponse(code = 202, message = "ACCEPTED", response = Equipment.class), @ApiResponse(code = 406, message = "NOT_ACCEPTABLE")})
     public ResponseEntity<Equipment> updateEquipment(@RequestBody Equipment equipment) {
@@ -81,7 +80,7 @@ public class EquipmentApiAll {
         return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
     }
 
-    @PutMapping("/changeAvailabilityList")
+    @PatchMapping("/changeAvailabilityList")
     @ApiOperation("Update availability of an equipmentList")
     @ApiResponses(value = {@ApiResponse(code = 202, message = "ACCEPTED"), @ApiResponse(code = 406, message = "NOT_ACCEPTABLE")})
     public ResponseEntity<HttpStatus> changeAvailabilityList(@RequestBody List<Equipment>equipmentList,@RequestParam boolean availability){
