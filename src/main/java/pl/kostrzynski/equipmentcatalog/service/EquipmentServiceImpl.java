@@ -53,7 +53,7 @@ public class EquipmentServiceImpl implements EquipmentService {
     public boolean addEquipment(Equipment equipment) {
         try {
             equipmentRepository.save(equipment);
-        }catch (Exception e){
+        } catch (Exception e) {
             return false;
         }
         return true;
@@ -61,7 +61,7 @@ public class EquipmentServiceImpl implements EquipmentService {
 
     @Override
     public boolean updateEquipment(Equipment equipment) {
-        if(equipment.isBroken())equipment.setAvailability(false);
+        if (equipment.isBroken()) equipment.setAvailability(false);
         return equipmentRepository.findById(equipment.getID())
                 .map(element -> {
                     element.setEquipmentName(equipment.getEquipmentName());
@@ -84,13 +84,13 @@ public class EquipmentServiceImpl implements EquipmentService {
     }
 
     @Override
-    public boolean changeAvailability(List<Equipment> equipmentList,boolean availability) {
-        for(Equipment equipment:equipmentList){
+    public boolean changeAvailability(List<Equipment> equipmentList, boolean availability) {
+        for (Equipment equipment : equipmentList) {
             equipment.setAvailability(availability);
         }
         try {
             equipmentRepository.saveAll(equipmentList);
-        }catch (Exception e){
+        } catch (Exception e) {
             return false;
         }
         return true;

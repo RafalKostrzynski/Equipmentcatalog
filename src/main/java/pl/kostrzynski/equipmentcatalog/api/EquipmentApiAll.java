@@ -83,8 +83,8 @@ public class EquipmentApiAll {
     @PatchMapping("/changeAvailabilityList")
     @ApiOperation("Update availability of an equipmentList")
     @ApiResponses(value = {@ApiResponse(code = 202, message = "ACCEPTED"), @ApiResponse(code = 406, message = "NOT_ACCEPTABLE")})
-    public ResponseEntity<HttpStatus> changeAvailabilityList(@RequestBody List<Equipment>equipmentList,@RequestParam boolean availability){
-        if (equipmentService.changeAvailability(equipmentList,availability)) {
+    public ResponseEntity<HttpStatus> changeAvailabilityList(@RequestBody List<Equipment> equipmentList, @RequestParam boolean availability) {
+        if (equipmentService.changeAvailability(equipmentList, availability)) {
             return new ResponseEntity<>(HttpStatus.ACCEPTED);
         }
         return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);

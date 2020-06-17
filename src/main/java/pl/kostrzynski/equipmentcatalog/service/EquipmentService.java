@@ -26,7 +26,7 @@ public interface EquipmentService {
 
     boolean changeAvailability(Long id, boolean availability);
 
-    boolean changeAvailability(List<Equipment> equipmentList,boolean availability);
+    boolean changeAvailability(List<Equipment> equipmentList, boolean availability);
 
     boolean changeBrokenStatus(Long id, boolean broken);
 
