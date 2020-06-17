@@ -62,22 +62,25 @@ public class EquipmentServiceImpl implements EquipmentService {
     @Override
     public boolean updateEquipment(Equipment equipment) {
         if(equipment.isBroken())equipment.setAvailability(false);
-        if (equipmentRepository.findById(equipment.getID()).isPresent()) {
-            return addEquipment(equipment);
-        }
-        return false;
+        return equipmentRepository.findById(equipment.getID())
+                .map(element -> {
+                    element.setEquipmentName(equipment.getEquipmentName());
+                    element.setBroken(equipment.isBroken());
+                    element.setClassification(equipment.getClassification());
+                    element.setSpecification(equipment.getSpecification());
+                    equipmentRepository.save(element);
+                    return true;
+                }).orElse(false);
     }
 
     @Override
     public boolean changeAvailability(Long id, boolean availability) {
-        Optional<Equipment> optionalEquipment = equipmentRepository.findById(id);
-        if (optionalEquipment.isPresent()) {
-            Equipment equipment = optionalEquipment.get();
-            equipment.setAvailability(availability);
-            equipmentRepository.save(equipment);
-            return true;
-        }
-        return false;
+        return equipmentRepository.findById(id)
+                .map(element -> {
+                    element.setAvailability(availability);
+                    equipmentRepository.save(element);
+                    return true;
+                }).orElse(false);
     }
 
     @Override
