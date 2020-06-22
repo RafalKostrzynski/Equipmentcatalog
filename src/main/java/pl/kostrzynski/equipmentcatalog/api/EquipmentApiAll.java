@@ -70,7 +70,7 @@ public class EquipmentApiAll {
         return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
     }
 
-    @GetMapping("/changeAvailability")
+    @PatchMapping("/changeAvailability")
     @ApiOperation("Change Availability of an Equipment")
     @ApiResponses(value = {@ApiResponse(code = 202, message = "ACCEPTED"), @ApiResponse(code = 406, message = "NOT_ACCEPTABLE")})
     public ResponseEntity<HttpStatus> changeAvailability(@RequestParam Long id, @RequestParam boolean available) {
@@ -90,7 +90,7 @@ public class EquipmentApiAll {
         return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
     }
 
-    @GetMapping("/changeBrokenStatus")
+    @PatchMapping("/changeBrokenStatus")
     @ApiOperation("Change the Broken status of an Equipment")
     @ApiResponses(value = {@ApiResponse(code = 202, message = "ACCEPTED"), @ApiResponse(code = 406, message = "NOT_ACCEPTABLE")})
     public ResponseEntity<HttpStatus> changeBrokenStatus(@RequestParam Long id, @RequestParam boolean broken) {
