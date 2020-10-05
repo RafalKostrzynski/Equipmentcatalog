@@ -21,14 +21,6 @@ public class Equipment {
     public Equipment() {
     }
 
-    public Equipment(String equipmentName, Classification classification, String specification, boolean broken, boolean availability) {
-        this.equipmentName = equipmentName;
-        this.classification = classification;
-        this.specification = specification;
-        this.broken = broken;
-        this.availability = availability;
-    }
-
     public Long getID() {
         return ID;
     }
