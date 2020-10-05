@@ -4,7 +4,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
-import org.springframework.web.servlet.ModelAndView;
 import pl.kostrzynski.equipmentcatalog.api.EquipmentApiAll;
 import pl.kostrzynski.equipmentcatalog.api.EquipmentApiAvailable;
 import springfox.documentation.builders.ApiInfoBuilder;

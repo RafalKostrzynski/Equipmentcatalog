@@ -16,7 +16,7 @@ import java.util.List;
 @Api(value = "AllEquipmentController", produces = MediaType.APPLICATION_JSON_VALUE)
 public class EquipmentApiAll {
 
-    private EquipmentService equipmentService;
+    private final EquipmentService equipmentService;
 
     @Autowired
     public EquipmentApiAll(EquipmentService equipmentService) {
@@ -29,7 +29,7 @@ public class EquipmentApiAll {
     public ResponseEntity<List<Equipment>> getAllEquipment() {
         List<Equipment> equipment = equipmentService.getAllEquipment();
         if (!equipment.isEmpty()) return new ResponseEntity<>(equipment, HttpStatus.OK);
-        return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
     @GetMapping("/getEquipmentById")
@@ -38,7 +38,7 @@ public class EquipmentApiAll {
     public ResponseEntity<Equipment> getEquipmentById(@RequestParam long id) {
         Equipment equipment = equipmentService.getEquipmentById(id);
         if (equipment != null) return new ResponseEntity<>(equipment, HttpStatus.OK);
-        return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
     @PostMapping
@@ -67,7 +67,7 @@ public class EquipmentApiAll {
     public ResponseEntity<List<Equipment>> getAllUnAvailableEquipment() {
         List<Equipment> equipment = equipmentService.getAllAvailableEquipment(false);
         if (!equipment.isEmpty()) return new ResponseEntity<>(equipment, HttpStatus.OK);
-        return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
     @PatchMapping("/changeAvailability")

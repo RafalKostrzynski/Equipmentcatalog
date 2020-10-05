@@ -20,7 +20,7 @@ import java.util.List;
 @Api(value = "AvailableEquipmentController", produces = MediaType.APPLICATION_JSON_VALUE)
 public class EquipmentApiAvailable {
 
-    private EquipmentService equipmentService;
+    private final EquipmentService equipmentService;
 
     @Autowired
     public EquipmentApiAvailable(EquipmentService equipmentService) {
@@ -33,7 +33,7 @@ public class EquipmentApiAvailable {
     public ResponseEntity<List<Equipment>> getAllAvailableEquipment() {
         List<Equipment> equipment = equipmentService.getAllAvailableEquipment(true);
         if (!equipment.isEmpty()) return new ResponseEntity<>(equipment, HttpStatus.OK);
-        return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
     @GetMapping("/getAllAvailableEquipmentByName")
@@ -42,7 +42,7 @@ public class EquipmentApiAvailable {
     public ResponseEntity<List<Equipment>> getAllAvailableEquipmentByName(@RequestParam String equipmentName) {
         List<Equipment> equipment = equipmentService.getAvailableEquipmentByName(equipmentName);
         if (!equipment.isEmpty()) return new ResponseEntity<>(equipment, HttpStatus.OK);
-        return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
     @GetMapping("/getAllAvailableEquipmentBySpecification")
@@ -51,7 +51,7 @@ public class EquipmentApiAvailable {
     public ResponseEntity<List<Equipment>> getAllAvailableEquipmentBySpecification(@RequestParam String specification) {
         List<Equipment> equipment = equipmentService.getAllAvailableEquipmentBySpecification(specification);
         if (!equipment.isEmpty()) return new ResponseEntity<>(equipment, HttpStatus.OK);
-        return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
     @GetMapping("/getAllAvailableEquipmentByClassification")
@@ -76,7 +76,7 @@ public class EquipmentApiAvailable {
                 classification = Classification.MATY;
                 break;
             default:
-                return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(equipmentService.getAllAvailableEquipmentByClassification(classification), HttpStatus.OK);
     }
