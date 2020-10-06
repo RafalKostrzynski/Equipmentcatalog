@@ -43,7 +43,7 @@ public class EquipmentApiAll {
 
     @PostMapping
     @ApiOperation("Post a new equipment")
-    @ApiResponses(value = {@ApiResponse(code = 202, message = "ACCEPTED", response = Equipment.class), @ApiResponse(code = 406, message = "NOT_ACCEPTABLE")})
+    @ApiResponses(value = {@ApiResponse(code = 202, message = "ACCEPTED"), @ApiResponse(code = 406, message = "NOT_ACCEPTABLE")})
     public ResponseEntity<HttpStatus> postEquipment(@RequestBody Equipment newEquipment) {
         if (equipmentService.addEquipment(newEquipment)) {
             return new ResponseEntity<>(HttpStatus.ACCEPTED);
