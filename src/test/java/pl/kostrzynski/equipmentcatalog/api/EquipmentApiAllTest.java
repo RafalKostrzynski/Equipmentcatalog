@@ -110,24 +110,15 @@ class EquipmentApiAllTest {
 
     @Test
     void postEquipment() throws Exception {
-
-        given(equipmentService.addEquipment(equipment)).willReturn(true);
         given(equipmentService.addEquipment(new Equipment())).willReturn(false);
 
         //check the isNotAcceptable response
 
         mockMvc.perform(post("/justfit/equipment")
-                .content(asJsonString(new Equipment()))
                 .contentType(MediaType.APPLICATION_JSON)
+                .content(asJsonString(new Equipment()))
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNotAcceptable());
-
-        //check the isAccepted response
-
-        mockMvc.perform(post("/justfit/equipment")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(asJsonString(equipment)))
-                .andExpect(status().isAccepted());
     }
 
 
